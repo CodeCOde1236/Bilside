@@ -1,0 +1,166 @@
+/*index.html*/
+
+h1, h2, h3, h4, h5, h6
+{
+	font-family: Verdana, Geneva, sans-serif;
+}
+
+
+.tittel
+{
+	background: linear-gradient(to right, black, green 70%);
+	padding: 7px 15px 7px 15px;
+	margin-left: 25px;
+	margin-bottom: 15px;
+	border-radius:11px;
+}
+
+.venstre
+{
+	display: flex;
+	flex-direction: row;
+}
+
+.tekst
+{
+	margin-left: 15px;
+}
+
+.meny
+{
+	margin-left: 25px;
+}
+
+
+.meny div
+{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 12vh;
+	height: 12vh;
+	background: linear-gradient(45deg, black, green 15%);
+	border-radius: 25px;
+}
+
+.meny a
+{
+	text-decoration: none;
+	color: #FFF;
+	display: block;
+	width: 12vh;
+	height: 12vh;
+	margin-bottom: 15px;
+}
+
+.meny div:hover
+{
+	background-color: #48AF81;
+}
+
+
+
+/*bil.php*/
+
+.bilde
+{
+	height: 140px;
+	margin: 5px;
+}
+
+.info
+{
+	margin-top: 15px;
+	margin-left: 10px;
+	line-height: 17px;
+	height: 51px;
+	width: 120px;
+}
+
+.personlig
+{
+	margin-top: 15px;
+	line-height: 17px;
+	margin-left: 10px;
+	width: 150px;
+}
+
+.boxflex
+{
+	display: inline-flex;
+	flex-direction: flex-row;
+	height: 140px;
+	width: fit-content;
+	box-sizing: border-box;
+	border: 3px solid black;
+	border-radius: 7px;
+	margin: 9px;
+}
+
+.bilflex
+{
+	display: flex;
+	flex-direction: column;
+	margin-left: 25vw;
+}
+
+.meta
+{
+	display: flex;
+	justify-content: center;
+}
+
+.mega
+{
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+
+.lenke
+{
+	position: relative;
+	bottom: 0;
+	right: 0;
+	background: #DDD;
+}
+
+/*Innlogging*/
+
+.loginbox
+{
+	position: absolute;
+	width: 12vw;
+	left: 40vw;
+	/*box-sizing: border-box;*/
+	border: 3px solid black;
+	padding: 0 40px 40px 40px;
+	background: linear-gradient(#DDD, #777 95%);
+}
+
+
+
+/*Administrator*/
+
+.adminmeny div
+{
+	border: 3px solid black;
+	padding: 5px;
+	background: linear-gradient(#DDD, #777 95%);
+	margin: 5px;
+	text-align: center;
+}
+
+.adminmeny a
+{
+	text-decoration: none;
+	color: black;
+}
+
+
+
+
+
+
+

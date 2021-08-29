@@ -1,0 +1,37 @@
+body
+{
+	background-color: rgba(200, 200, 50, 1);
+}
+
+table div
+{
+	border: 3px;
+	border-style: solid;
+	border-color: #000;
+	width: 30vw;
+	height: 30vh;
+}
+
+td
+{
+	padding-right: 15vw;
+	padding-left: 7.8vw;
+	padding-bottom: 4vh;
+}
+
+table
+{
+    margin-left:auto; 
+    margin-right:auto;
+}
+
+h1, h2, h3, p
+{
+	font-family: "Times New Roman", Times, serif;
+}
+
+p
+{
+	font-size: 20px;
+	margin-left: 5px;
+}

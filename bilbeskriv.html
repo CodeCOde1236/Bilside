@@ -1,0 +1,107 @@
+<!doctype html>
+
+<html>
+
+<head>
+	<meta charset = "UTF-8">
+</head>
+
+<body>
+
+<div style = "height: 10vh; display: flex; align-items: center; background: linear-gradient(to right, green, black); border-radius: 10px;">
+<h1 style = "color: #FFF; margin-left: 15px;">Bilutleie prosjektbeskrivelse og dokumentasjon</h1>
+</div>
+
+<p style = "display: block;">
+
+Prosjektbeskrivelse - Bilside
+<br><br>
+Hensikt<br>
+Hensikten med prosjektet er å bruke databaser i en nettside. Jeg mente at en bilutleining nettside ville være en bra måte å ibruksette kunnskapet mitt om MySQLdatabaser samt PHP på.
+<br><br>
+<img src = "bilder/nettsidebild.png">
+<br><br>
+Prosjekt<br>
+Da jeg først tenkte på hva jeg skulle ha med i prosjektet, tenkte jeg på en tittel, og en meny på sida slik at man kan ha med mer på skjermen om gangen. Nettsiden bruker 18 nettsider til sammen, for form og form prosessering.
+<br><br>
+MySQL<br>
+<img src = "bilder/sql.png" style = "height: 300px; width: 600px;"><br>
+MySQL database inneholder fem tabeller. Den første tabellen, post_info (heter “informasjon” i selve databasen i mysql.klasserom.net), viser informasjon om bilpostene. Når man vil utleie en bil, lager de en slags “post”. Innholdet om bilen, eventuelt farge, serie, merke, pris, innsamlings adresse osv. sendes til MySQL databasen på mysql.klasserom.net, behandles og sendes videre til andre klienter når de går til sida med bilposter for mulighet om å leie bil.
+<br><br>
+Tabellen person_info bevarer informasjon om hver enkel person som bruker nettstedet. Dersom man ønsker å bli bruker og registrerer seg, er det person_info tabellen som informasjonen blir satt inn i.
+
+I bildet satt ovenfor, er kpnøkkel en kombinert primærnøkkel med en-til-en forkobling mellom seg og post-info samt mange-til-en forkobling med person_info. Den finnes for å vite hvilken bil (fra post_info) noen (fra person_info) har bestilt.
+<br><br>
+Historie tabellen viser rett og slett hvem som har bestilt hva, når de har bestilt den og om de har levert den tilbake. 
+<br><br>
+Kontakt tabellen har bare epost, og ble satt opp for å oppfylle tredje normalformen, der det kan bare være en primærnøkkel i en tabell.
+
+<br><br>
+
+Innlogging/utlogging
+Det er tre sider som er assossiert med innlogging/utlogging. Den første er nemlig siden som inneholder <form> for innlogging. Den er en PHP fil med en if-løkke. Hvis du er ikke innlogget, viser den innloggingsformen. Ellers får du en utloggingsform:
+<br>
+<img src = "bilder/innlog.png" style = "height: 200px; width: 200px;"><br>
+<img src = "bilder/utlog.png" style = "height: 200px; width: 200px;"><br>
+
+De andre to filer assosiert med denne er nemlig en PHP fil som behandler innloggingen og sender deg tilbake til innloggingssiden samt en som logger deg ut og gjør det samme. Grunnen til at to forskjellige fil brukes for både innlogging og utlogging er fordi at det er mer effektiv i dette tilfellet. Det blir til sammen mer kode dersom man har både innloggingen og utloggingen i samme fil. Det blir mer komplisert når PHP filen må håndtere to mulige knapper av type “submit” for en if-løkke, selv om det høres lettere ut. Å ha dem i to forskjellige filer ga programmet mindre komputasjonell kompleksitet og nettsiden får fungere fortere.
+<br><br>
+For å logge inn bruker vi SQL for å sjekke om brukernavn og passord finnes ved å bruke følgende spørringen sammen med PHP:
+<br><br>
+“FROM person_info SELECT person_id WHERE fornavn = ”.$[Fornavnsvariabelen].” AND etternavn = ”.$[Etternavnsvariabelen].”;”
+<br><br>
+For å forbli innlogget i siden og kun navigere fra side til side uten å automatisk bli utlogget i en andre side utnyttes det sessions.
+<br><img src = "bilder/php.png" style = "height: 200px; width: 400px;"><br>
+
+For å få admin-access har du følgende:<br>
+Brukernavn: admin<br>
+Passord: admin1<br><br>
+Denne kombinasjon av brukernavn og passord hentes fra databasen.
+
+<br><br>
+“Bli medlem” siden er der du får registrere en ny bruker. Informasjonen sendes fra skjemaet til en PHP fil som bruker “INSERT” i sql-spørringen:
+<br><br>
+$sql = “INSERT INTO person_info VALUES ([verdiene]);”;
+PersonID for nye personen får vi ved å sjekke høyeste person_id tallet ved “MAX(person_id)”, og legge til en før bruk. Hvis x er høyeste person_id verdien, bruker vi ++x i sql-spørringen (for å øke verdien til x før vi bruker den, i motsetning til x++). Det er viktig å forstå at dersom en medlem fjernes blir det ulik rekkefølge, men dette går greit så langt alle person_id tallene er unike.
+<br><br>
+“Bil” siden viser alle postene med bilder av bilmerkenes logo. Den henter informasjon fra post_info og bruker den til å organisere informasjonen i små tabeller i nettsiden.
+<br><img src = "bilder/phpto.png" style = "height: 600px; width: 300px;"><br>
+
+Man får bestille bil, hvem som bestiller og utleieren blir satt inn i kombinerte primærnøkkel tabellen samt historie tabellen. I historie tabellen legges også bestillingsdato og innleveringsdato i tillegg. Raden er fjernet fra kp tabellen når bilen er tilbakelevert.
+<br><br>
+Det er mulig å poste bil ved på “Post bil” siden, og informasjonen registreres i post_informasjon.
+<br><br>
+Dersom du logger inn som admin, får du en tillegsknapp på siden. Du får muligheten å sjekke bilhistorien, fjerne medlemmer og bilposter.
+<br><br>
+Uke 16:
+Jeg begynte å tenke på hva slags nettside jeg burde lage for å utnytte databaser så effektivt som mulig. Det var ved slutten av uka der jeg bestemte meg å lage en bilutleie, etter jeg var ubestemt mellom den og en bibliotekside.
+<br><br>
+Uke 17:
+Jeg begynte å sette i gang med datamodellene. “Bil” siden var første delen jeg laget av bilutleiningssiden. Jeg lastet ned mange bilmerke bilder og opprettet databasen for post_info. Ette mye jobbing fikk jeg alt til å fungere som de burde.
+<br><br>
+Uke 18
+Jeg laget menysiden og legget til design. Jeg fikk til generelle strukturen nøyaktig som jeg ville ha den men opplevde litt problemer med å finne en passende farge mønster. Jeg bestemte meg etter hvert at en grønn til svart horisontal linear-gradient() passet best. Jeg laget også  nettstedets menyside.
+<br><br>
+Uke 19
+Begynte å jobbe på innloggingssystemet. Jeg lærte meg om sessions i PHP for å forbli innlogget etter man bytter nettside. Sessions er oppbevart ved tjeneren, så de kan brukes over hele nettstedet.
+<br><br>
+Uke 20 && 21
+Disse to ukene var ikke særlig produktivt på grunn av arbeidsmengden vi begynte å få fra andre fag. Jeg begynte på en adminside.
+<br><br>
+Uke 20 && 21
+Lagt til historie tabellen etter anbefaling fra en venn. Admin måtte kunne sjekke utleiningshistorien. Begynte også å jobbe på medlemslisten og bilpost oversikt, der admin kan fjerne bilposter og medlemmer.
+<br><br>
+Uke 22
+Ble ferdig med “Post bil” lenken slik at du kan legge ut bilen din for utleining.
+<br><br>
+Konklusjon
+For å oppsummere, lærte jeg veldig mye av å bygge denne nettside for it1 i år. Den var veldig gøy å programmere og jeg fikk lære en del nye MySQL og PHP. Hvis det var en ting jeg kunne endre på, ville  jeg ha prøvd å forenkle koden så mye som mulig for å redusere kompleksitet.
+
+
+</p>
+
+<a href = "index.html">Tilbake til hjemmesiden</a>
+
+</body>
+
+</html>
